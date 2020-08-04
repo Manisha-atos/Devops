@@ -1,0 +1,276 @@
+intially cover all the elements
+feature with simple print 
+then with one scenario
+then include webdriver scripts
+then in cucumber options - feature, glue, reports 
+then tags 
+hooked tags with  JUNIT,testNg ,maven Integeration
+datadriven testing in cucumber is last topic
+
+
+Cucumber is a testing tool that supports Behavior Driven Development (BDD). It offers a way to write tests that anybody can understand, regardless of their technical knowledge. In BDD, users (business analysts, product owners) first write scenarios or acceptance tests that describe the behavior of the system from the customer's perspective, for review and sign-off by the product owners before developers write their codes.
+Cucumber is a testing tool that supports Behavior Driven Development (BDD) framework. It defines application behavior using simple English text, defined by a language called Gherkin.
+
+Cucumber allows automation functional validation that is easily read and understood. Cucumber was initially implemented in Ruby and then extended to Java framework. Both the tools support native JUnit.
+
+Test-Driven Development
+TDD is an iterative development process. Each iteration starts with a set of tests written for a new piece of functionality. These tests are supposed to fail during the start of iteration as there will be no application code corresponding to the tests. In the next phase of the iteration, Application code is written with an intention to pass all the tests written earlier in the iteration. Once the application code is ready tests are run.
+
+Benefits of TDD
+Unit test proves that the code actually works
+Can drive the design of the program
+Refactoring allows improving the design of the code
+Low-Level regression test suite
+Test first reduce the cost of the bugs
+ 
+
+Drawbacks of TDD
+Developer can consider it as a waste of time
+The test can be targeted on verification of classes and methods and not on what the code really should do
+Test become part of the maintenance overhead of a project
+Rewrite the test when requirements change.
+ 
+
+
+Behavior Driven Development
+Behavior Driven testing is an extension of TDD.
+Like in TDD in BDD also we write tests first and the add application code. The major difference that we get to see here are
+
+Tests are written in plain descriptive English type grammar
+Tests are explained as behavior of application and are more user-focused
+Cucumber supports different languages like Java.net and Ruby.
+It allows the test script to be written without knowledge of any code, it allows the involvement of non-programmers as well.
+
+Cucumber supports over a dozen different software platforms like -
+
+Ruby on Rails
+Selenium
+PicoContainer
+Spring Framework
+Watir
+
+
+How BDD works in Cucumber Automation?
+Consider you are assigned to create Funds Transfer module in a Net Banking application.
+
+There are multiple ways to test it
+
+
+Fund Transfer should take place if there is enough balance in source account
+Fund Transfer should take place if the destination a/c details are correct
+Fund Transfer should take place if transaction password / rsa code / security authentication for the transaction entered by user is correct
+Fund Transfer should take place even if it's a Bank Holiday
+Fund Transfer should take place on a future date as set by the account holder.
+
+In BDD, whatever you write must go into Given-When-Then steps. Lets consider the same example above in BDD
+
+Given that a fund transfer module in net banking application has been developed
+And I am accessing it with proper authentication
+WhenI shall transfer with enough balance in my source account
+Or I shall transfer on a Bank Holiday
+Or I shall transfer on a future date
+And destination a/c details are correct
+And transaction password/RSA code/security authentication for the transaction is correct
+And press or click send button
+Then amount must be transferred
+And the event will be logged in log file
+
+Demo1:
+Download jars for 
+cucumber-core,cucmber-java,cucumber-junit,cucumber-
+
+
+1. Create a new java project.
+2. Build path and add external libra..
+3. 
+
+
+
+
+
+test are written in a language called gherkin.
+Feature:A Feature File is an entry point to the Cucumber tests. This is a file where you will describe your tests in Descriptive language (Like English). It is an essential part of Cucumber, as it serves as an automation test script as well as live documents. A feature file can contain a scenario or can contain many scenarios in a single feature file but it usually contains a list of scenarios
+
+JUnit Test Runner Class
+Create a new Class file in the ‘cucumberTest‘ package and name it as ‘TestRunner‘, by right click on the Package and select New > Class. This class just needs annotations to understand that cucumber features would be run through it and you can specify feature files to be picked up plus the steps package location
+
+ Here is the list of keywords that Gherkin supports:
+Gherkin Keyword:
+
+
+
+Feature
+Background
+Scenario
+Given
+When
+Then
+And
+But
+*
+
+Demo 2: with maven
+
+reports:
+https://www.toolsqa.com/selenium-cucumber-framework/cucumber-reports/
+
+Reports:
+Demo 1:
+@CucumberOptions( features = "src/test/resources/Features",glue="",
+		   plugin = {"pretty", "html:target/Destination"} ) 
+
+
+//Specifying pretty as a format option ensure that HTML report will be generated. 
+//When we specify html:target/Destination - It will generate the HTML report 
+
+inside the Destination folder, in the target folder of the maven project. 
+
+Demo 2:
+Pretty Report
+The first plugin, we will talk about is Pretty.  This provides more verbose output. To implement this, just specify plugin = “pretty” in CucumberOptions. This is what the code looks like:
+
+@CucumberOptions( plugin = { “pretty” } )
+
+
+@CucumberOptions( features = "src/test/resources/Features",glue="",
+		   plugin = {"pretty"} ) 
+
+
+
+output:
+Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
+ChromeDriver was started successfully.
+[1596513491.825][WARNING]: This version of ChromeDriver has not been tested with Chrome version 84.
+ChromeDriver: chrome on XP (714324382e0e41446b9a63866bc2c045)
+login page open
+user enters valid user name & password
+user is able to login
+
+  Scenario: Successful Login with Valid Credentials                    [90m# Feature1.feature:3[0m
+    [32mGiven [0m[32mUser is on Home Page[0m                                         [90m# LoginStep.user_is_on_Home_Page()[0m
+    [32mWhen [0m[32mUser Navigate to LogIn Page,enter valid username and password[0m [90m# LoginStep.user_Navigate_to_LogIn_Page()[0m
+    [32mThen [0m[32mMessage displayed Login Successfully[0m                          [90m# LoginStep.message_displayed_Login_Successfully()[0m
+
+1 Scenarios ([32m1 passed[0m)
+3 Steps ([32m3 passed[0m)
+0m10.863s
+
+Demo 3:
+Monochrome Mode Reporting
+If the monochrome option is set to false, then the console output is not as readable as it should be. The output when the monochrome option is set to false is shown in the above example. It is just because, if the monochrome is not defined in Cucumber Options, it takes it as false by default. How to specify it:
+
+@CucumberOptions( monochrome = true );
+
+@CucumberOptions( features = "src/test/resources/Features",glue="",
+		   plugin = {"pretty"} ,monochrome=true) 
+
+output:
+Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
+ChromeDriver was started successfully.
+[1596513616.927][WARNING]: This version of ChromeDriver has not been tested with Chrome version 84.
+ChromeDriver: chrome on XP (6866b52f45e96ff249932ffdbe5deb0b)
+login page open
+user enters valid user name & password
+user is able to login
+
+  Scenario: Successful Login with Valid Credentials                    # Feature1.feature:3
+    Given User is on Home Page                                         # LoginStep.user_is_on_Home_Page()
+    When User Navigate to LogIn Page,enter valid username and password # LoginStep.user_Navigate_to_LogIn_Page()
+    Then Message displayed Login Successfully                          # LoginStep.message_displayed_Login_Successfully()
+
+1 Scenarios (1 passed)
+3 Steps (3 passed)
+0m25.311s
+
+
+Usage Report
+If we are more concerned about the time taken by each Step Definition, then we should use the usage plugin. This is how we specify the same in @CucumberOptions:
+
+@CucumberOptions( plugin = { “usage” })
+@CucumberOptions( features = "src/test/resources/Features",glue="",
+		   plugin = {"usage"} ,monochrome=true) 
+
+output:
+ChromeDriver: chrome on XP (72bb5485ecb1a61591f6f75a66d4ac93)
+login page open
+user enters valid user name & password
+user is able to login
+[
+  {
+    "source": "^User is on Home Page$",
+    "steps": [
+      {
+        "name": "User is on Home Page",
+        "aggregatedDurations": {
+          "average": 7.760189601,
+          "median": 7.760189601
+        },
+        "durations": [
+          {
+            "duration": 7.760189601,
+            "location": "Feature1.feature:5"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "source": "^User Navigate to LogIn Page,enter valid username and password$",
+    "steps": [
+      {
+        "name": "User Navigate to LogIn Page,enter valid username and password",
+        "aggregatedDurations": {
+          "average": 1.379373926,
+          "median": 1.379373926
+        },
+        "durations": [
+          {
+            "duration": 1.379373926,
+            "location": "Feature1.feature:7"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "source": "^Message displayed Login Successfully$",
+    "steps": [
+      {
+        "name": "Message displayed Login Successfully",
+        "aggregatedDurations": {
+          "average": 2.335928844,
+          "median": 2.335928844
+        },
+        "durations": [
+          {
+            "duration": 2.335928844,
+            "location": "Feature1.feature:9"
+          }
+        ]
+      }
+    ]
+  }
+]
+1 Scenarios (1 passed)
+3 Steps (3 passed)
+0m11.475s
+
+Cucumber Report Output
+You must be wondering that all we have seen above is actually good for a test or for a couple of tests. But if we run a full test suite, this report is not much useful in that case. On top of that, it is difficult to keep these console output safe for future use.
+
+Cucumber gives us the capability to generate reports as well in the form of HTML, XML, JSON & TXT. Cucumber frameworks generate very good and detailed reports, which can be shared with all stakeholders. There are multiple options available for reports which can be used depending on the requirement.
+
+features = "src/test/resources/functionalTests",
+ glue= {"stepDefinitions"},
+ plugin = { "pretty", "html:target/cucumber-reports" },
+ monochrome = true
+)
+
+Cucumber JSON Report
+
+@CucumberOptions( features = "src/test/resources/Features",glue="",
+plugin = { "pretty", "json:target/cucumber-reports/Cucumber.json" },monochrome=true) 
+
+
+
+
